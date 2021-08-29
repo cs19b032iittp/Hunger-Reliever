@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "471434177893",
+    "project_id": "hunger-reliever-by-team-6",
+    "storage_bucket": "hunger-reliever-by-team-6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471434177893:android:a4d0efd5c333320b8c858c",
+        "android_client_info": {
+          "package_name": "com.charan.hungerreliever"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "471434177893-ndtvs96ff8djlmvchqbbeavve75rciio.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqAOmP4oaM0z2gykgc2a5t5w4Z_XRcOEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "471434177893-ndtvs96ff8djlmvchqbbeavve75rciio.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
