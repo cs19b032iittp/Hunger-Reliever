@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Register"
+    android:clickable="true"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <LinearLayout
@@ -58,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Phone"
+            app:prefixText="+91"
             app:startIconDrawable="@drawable/ic_baseline_local_phone_24">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -90,7 +93,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:layout_marginTop="8dp"
             app:passwordToggleEnabled="true"
             app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
@@ -108,15 +110,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:checkedButton="@id/user_radio"
             android:gravity="right"
             android:orientation="horizontal"
             android:paddingStart="16dp"
-            android:paddingRight="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/RegisterPassword">
-
+            android:checkedButton="@id/user_radio"
+            android:paddingRight="32dp">
             <RadioButton
                 android:id="@+id/user_radio"
                 android:layout_width="wrap_content"
@@ -132,9 +130,9 @@
                 android:layout_height="wrap_content"
                 android:buttonTint="@color/Mustard"
                 android:text="Organisation" />
-
-
         </RadioGroup>
+
+
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonContinue"

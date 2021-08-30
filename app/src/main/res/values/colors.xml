@@ -8,4 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="Mustard">#dda63a</color>
+    <color name="zero_hunger">#DDA63A</color>
+    <color name="zero_hunger_ab">#D18D07</color>
+    <color name="zero_hunger_nav">#F8B430</color>
 </resources>

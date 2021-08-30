@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Login"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <LinearLayout
@@ -40,8 +41,10 @@
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
+            android:id="@+id/emailLoginLayout"
             android:layout_height="wrap_content"
             android:hint="Email"
+            app:endIconMode="clear_text"
             app:startIconDrawable="@drawable/ic__email">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -49,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
+                android:imeOptions="actionDone"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -58,6 +62,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
+            android:id="@+id/loginPasswordLayout"
             android:layout_marginTop="8dp"
             app:passwordToggleEnabled="true"
             app:startIconDrawable="@drawable/ic_baseline_lock_24">
@@ -67,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
+                android:imeOptions="actionDone"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -94,9 +100,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingVertical="32dp"
+        android:gravity="bottom"
         android:orientation="vertical"
-        android:gravity="bottom">
+        android:paddingVertical="32dp">
 
         <ProgressBar
             android:id="@+id/progressBarLogin"
@@ -111,13 +117,11 @@
             android:id="@+id/textRegisterButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New User! Register Here"
-            android:textColor="@color/Mustard"
             android:gravity="center"
-            android:padding="8dp" />
-
-
-
+            android:imeOptions="actionDone"
+            android:padding="8dp"
+            android:text="New User! Register Here"
+            android:textColor="@color/Mustard" />
 
 
     </LinearLayout>

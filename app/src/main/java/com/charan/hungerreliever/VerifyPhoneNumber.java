@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
@@ -21,7 +23,11 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class VerifyPhoneNumber extends AppCompatActivity {
@@ -31,8 +37,9 @@ public class VerifyPhoneNumber extends AppCompatActivity {
     private String verificationCodeBySystem;
     private  FirebaseAuth auth;
     private Bundle bundle;
-    private  String name ,email, phone, password;
+    private  String name ,email, phone, password,user;
     private ProgressBar progressBar;
+    FirebaseFirestore firestore;
 
 
     @Override
@@ -47,13 +54,17 @@ public class VerifyPhoneNumber extends AppCompatActivity {
         phone = bundle.getString("Phone");
         email = bundle.getString("Email");
         password = bundle.getString("Password");
+        user = bundle.getString("User");
         verificationCodeBySystem = bundle.getString("auth");
         progressBar = findViewById(R.id.progressBarVerify);
         auth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
 
         verify_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
                 String verification_code = otp.getText().toString();
                 if(!verification_code.isEmpty()){
                     PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationCodeBySystem,verification_code);
@@ -95,10 +106,9 @@ public class VerifyPhoneNumber extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-
+                    createUserProfile();
                     progressBar.setVisibility(View.GONE);
-                    Toast.makeText(VerifyPhoneNumber.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(SendOTP.this, "OTP Verifed! User Signed in", Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(VerifyPhoneNumber.this,DashBoard.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);
@@ -108,6 +118,22 @@ public class VerifyPhoneNumber extends AppCompatActivity {
                     Toast.makeText(VerifyPhoneNumber.this, "Error!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.INVISIBLE);
                 }
+            }
+        });
+    }
+
+    private void createUserProfile() {
+        DocumentReference documentReference =firestore.collection("users").document(auth.getCurrentUser().getUid());
+        Map<String,Object> data = new HashMap<>();
+        data.put("name",name);
+        data.put("phone",phone);
+        data.put("email",email);
+        data.put("user",user);
+
+        documentReference.set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(VerifyPhoneNumber.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
             }
         });
     }
