@@ -9,19 +9,24 @@
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/drawable/ic_history.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/drawable/ic_otp.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/drawable/ic_person.xml" value="0.20052083333333334" />
+        <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/drawable/ic_search.xml" value="0.14907407407407408" />
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/layout/activity_dash_board.xml" value="0.175" />
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/layout/activity_login.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/layout/activity_main.xml" value="0.184375" />
+        <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/layout/activity_org_dash_board.xml" value="0.184375" />
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/layout/activity_payment.xml" value="0.184375" />
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/layout/activity_register.xml" value="0.184375" />
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/layout/activity_reset.xml" value="0.184375" />
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/layout/activity_send_otp.xml" value="0.135678391959799" />
+        <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/layout/activity_temp.xml" value="0.16944444444444445" />
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/layout/activity_verify_phone_number.xml" value="0.184375" />
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/layout/fragment_donate_food.xml" value="0.184375" />
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/layout/fragment_donate_money.xml" value="0.184375" />
+        <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/layout/fragment_received_donations.xml" value="0.184375" />
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/layout/nav_header.xml" value="0.184375" />
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/layout/user_dashboard.xml" value="0.184375" />
         <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/menu/drawer_menu.xml" value="0.184375" />
+        <entry key="..\:/Users/pvmch/Desktop/Projects/Hunger Reliever/app/src/main/res/menu/org_drawer_menu.xml" value="0.184375" />
       </map>
     </option>
   </component>
