@@ -11,4 +11,8 @@
     <string name="donation_history">Donation History</string>
     <string name="donations_received">Donations Received</string>
     <string name="home">Home</string>
+
+    <string name="food_donors">Food Donors</string>
+    <string name="org_navigation_drawer_open">Open Org Navigation Drawer</string>
+    <string name="org_navigation_drawer_close">Close Org Navigation Drawer</string>
 </resources>

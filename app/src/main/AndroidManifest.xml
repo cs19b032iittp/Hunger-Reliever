@@ -28,6 +28,9 @@
             android:name=".UserDashboard"
             android:exported="true" />
         <activity
+            android:name=".Orgdashboard"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

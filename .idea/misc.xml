@@ -3,6 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Adithya/AndroidStudioProjects/Hunger-Reliever/app/src/main/res/drawable-v24/ic_donations_received.xml" value="0.1361111111111111" />
+        <entry key="..\:/Users/Adithya/AndroidStudioProjects/Hunger-Reliever/app/src/main/res/drawable-v24/ic_org.xml" value="0.1361111111111111" />
+        <entry key="..\:/Users/Adithya/AndroidStudioProjects/Hunger-Reliever/app/src/main/res/drawable-v24/ic_org_home.xml" value="0.1361111111111111" />
+        <entry key="..\:/Users/Adithya/AndroidStudioProjects/Hunger-Reliever/app/src/main/res/drawable-v24/ic_org_view_profile.xml" value="0.1" />
+        <entry key="..\:/Users/Adithya/AndroidStudioProjects/Hunger-Reliever/app/src/main/res/layout/activity_orgdashboard.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Adithya/AndroidStudioProjects/Hunger-Reliever/app/src/main/res/layout/fragment_org_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Adithya/AndroidStudioProjects/Hunger-Reliever/app/src/main/res/layout/fragment_org_profile.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Adithya/AndroidStudioProjects/Hunger-Reliever/app/src/main/res/layout/fragment_received_donations.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Adithya/AndroidStudioProjects/Hunger-Reliever/app/src/main/res/layout/org_nav_header.xml" value="0.1" />
+        <entry key="..\:/Users/Adithya/AndroidStudioProjects/Hunger-Reliever/app/src/main/res/menu/org_drawer_menu.xml" value="0.67" />
         <entry key="..\:/Users/Murali/Desktop/Charan/clone/Hunger-Reliever-Team6/app/src/main/res/layout/activity_verify_phone_number.xml" value="0.15520833333333334" />
         <entry key="..\:/Users/Murali/Desktop/Charan/clone/Hunger-Reliever-Team6/app/src/main/res/layout/fragment_donate_food.xml" value="0.22146739130434784" />
         <entry key="..\:/Users/Murali/Desktop/Charan/clone/Hunger-Reliever-Team6/app/src/main/res/layout/user_dashboard.xml" value="0.22146739130434784" />
