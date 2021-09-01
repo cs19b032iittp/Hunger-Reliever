@@ -16,6 +16,9 @@
             android:name=".SendOTP"
             android:exported="true" />
         <activity
+            android:name=".UpiPayment"
+            android:exported="true" />
+        <activity
             android:name=".VerifyPhoneNumber"
             android:exported="true" />
         <activity

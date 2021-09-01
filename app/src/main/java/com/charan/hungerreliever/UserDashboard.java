@@ -51,7 +51,9 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new DonateFoodFragment()).commit();
                 break;
             case R.id.nav_money_donate:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new DonateMoneyFragment()).commit();
+                Intent intent2 = new Intent(UserDashboard.this,UpiPayment.class);
+                startActivity(intent2);
+                finish();
                 break;
             case R.id.nav_logout:
                 FirebaseAuth.getInstance().signOut();
