@@ -32,7 +32,7 @@ public class Login extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(new Intent(getApplicationContext(),DashBoard.class)));
+            startActivity(new Intent(new Intent(getApplicationContext(),UserDashboard.class)));
             finish();
         }
     }
@@ -115,7 +115,7 @@ public class Login extends AppCompatActivity {
                         if(task.isSuccessful()){
                             progressBar.setVisibility(View.INVISIBLE);
                             Toast.makeText(Login.this, "Log In Successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), DashBoard.class));
+                            startActivity(new Intent(getApplicationContext(), UserDashboard.class));
                             finish();
                         }
                         else {

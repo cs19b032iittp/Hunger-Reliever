@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/donate_food_layout">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter the details of donating food"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginTop="100dp"
+        android:textColor="@color/zero_hunger"
+        android:id="@+id/donate_indicator"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/donate_indicator"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="100dp"
+        android:hint="Regional name of the food"
+        android:id="@+id/food_name"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/food_name"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="30dp"
+        android:id="@+id/food_quantity"
+        android:hint="Quantity of the food (in units)"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/food_quantity"
+        android:layout_marginTop="3dp"
+        android:layout_centerHorizontal="true"
+        android:text="(Example : 250gms or 2Kgs)"
+        android:id="@+id/quantity_example"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/quantity_example"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginTop="27dp"
+        android:hint="Adders of the food"
+        android:id="@+id/food_adders"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/food_adders"
+        android:layout_centerHorizontal="true"
+        android:text="donate"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/black"/>
+
+</RelativeLayout>

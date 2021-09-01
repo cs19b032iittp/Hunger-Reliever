@@ -121,6 +121,8 @@ public class SendOTP extends AppCompatActivity {
                     }
                 },10000);
 
+
+
             }
         };
 
@@ -136,7 +138,7 @@ public class SendOTP extends AppCompatActivity {
                     createUserProfile();
 
                     progressBar.setVisibility(View.GONE);
-                    Intent intent = new Intent(SendOTP.this,DashBoard.class);
+                    Intent intent = new Intent(SendOTP.this,UserDashboard.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);
                     finish();

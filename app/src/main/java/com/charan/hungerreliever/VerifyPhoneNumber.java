@@ -109,8 +109,8 @@ public class VerifyPhoneNumber extends AppCompatActivity {
                 if(task.isSuccessful()){
                     createUserProfile();
                     progressBar.setVisibility(View.GONE);
-
-                    Intent intent = new Intent(VerifyPhoneNumber.this,DashBoard.class);
+//TODO: user goes to userDasboard and admin goes to admin dashboard
+                    Intent intent = new Intent(VerifyPhoneNumber.this,UserDashboard.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);
                     finish();
