@@ -121,8 +121,6 @@ public class SendOTP extends AppCompatActivity {
                     }
                 },10000);
 
-
-
             }
         };
 

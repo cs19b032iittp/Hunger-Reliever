@@ -1,4 +1,4 @@
-package hungerreliever.charan.hungerreliever;
+package com.charan.hungerreliever;
 
 import android.content.Context;
 
