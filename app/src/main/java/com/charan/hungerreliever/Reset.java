@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Reset extends AppCompatActivity {
 
+    // Declaring required variables
     private EditText email;
     private TextView cancelText;
     private Button resetBtn;
@@ -33,16 +34,10 @@ public class Reset extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset);
 
+        // Initialize the declared variables
+        Initialize();
 
-        email = findViewById(R.id.emailReset);
-        resetBtn = findViewById(R.id.buttonReset);
-        progressBar = findViewById(R.id.progressBarReset);
-        firebaseAuth = FirebaseAuth.getInstance();
-        cancelText = findViewById(R.id.textCancelReset);
-        mail = getIntent().getStringExtra("email");
-
-        email.setText(mail);
-
+        // If "Send button" was clicked reset link will be sent to their given email
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,5 +84,17 @@ public class Reset extends AppCompatActivity {
         });
 
 
+    }
+
+    // method to initialize the declared variables
+    private void Initialize() {
+        email = findViewById(R.id.emailReset);
+        resetBtn = findViewById(R.id.buttonReset);
+        progressBar = findViewById(R.id.progressBarReset);
+        firebaseAuth = FirebaseAuth.getInstance();
+        cancelText = findViewById(R.id.textCancelReset);
+        mail = getIntent().getStringExtra("email");
+
+        email.setText(mail);
     }
 }

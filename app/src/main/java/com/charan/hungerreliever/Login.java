@@ -15,21 +15,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity {
 
-    //cs19b032
 
+    // Declaring required variables
     private EditText email, password;
-    private TextInputLayout mail,pwd;
     private TextView registerText,forgotPasswordText;
     private ProgressBar progressBar;
     private Button button;
     private FirebaseAuth firebaseAuth;
 
+    // If user is logged in redirect to dashboard
     @Override
     protected void onStart() {
         super.onStart();
@@ -44,16 +43,10 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mail = findViewById(R.id.emailLoginLayout);
-        pwd = findViewById(R.id.loginPasswordLayout);
-        registerText = findViewById(R.id.textRegisterButton);
-        email = findViewById(R.id.emailLogin);
-        password = findViewById(R.id.PasswordLogin);
-        progressBar = findViewById(R.id.progressBarLogin);
-        button = findViewById(R.id.buttonLogin);
-        forgotPasswordText = findViewById(R.id.textForgotPassword);
-        firebaseAuth = FirebaseAuth.getInstance();
+        // Initialize the declared variables
+        Initialize();
 
+        // If "Forgot Password" was clicked redirect to Reset Page
         forgotPasswordText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,6 +60,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        // If  "Create an Account" was clicked redirect to Registration Page
         registerText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,15 +73,19 @@ public class Login extends AppCompatActivity {
         });
 
 
-
+        // If "Login button" was clicked ...
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                // Hide the soft input Keyboard
                 InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
                 String Email =  email.getText().toString();
                 String Password = password.getText().toString();
 
+                // To check text in any input box was left empty or it doesn't match pattern to that specific box
                 if(TextUtils.isEmpty(Email)){
                     email.setError("Email is Required.");
                     return;
@@ -111,12 +109,15 @@ public class Login extends AppCompatActivity {
 
                 progressBar.setVisibility(View.VISIBLE);
 
+                // user authentication
                 firebaseAuth.signInWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
+
+                            //If  Login Successful redirect to dashboard
                             progressBar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(Login.this, "Log In Successful", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(getApplicationContext(), UserDashboard.class));
                             finish();
                         }
@@ -128,6 +129,17 @@ public class Login extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    // method to initialize the declared variables
+    private void Initialize() {
+        registerText = findViewById(R.id.textRegisterButton);
+        email = findViewById(R.id.emailLogin);
+        password = findViewById(R.id.PasswordLogin);
+        progressBar = findViewById(R.id.progressBarLogin);
+        button = findViewById(R.id.buttonLogin);
+        forgotPasswordText = findViewById(R.id.textForgotPassword);
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
 }

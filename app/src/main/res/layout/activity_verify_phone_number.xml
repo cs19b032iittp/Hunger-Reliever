@@ -24,6 +24,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/actor"
             android:text="Verify your phone number to create account"
             android:textColor="#808080"
@@ -33,7 +34,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="32dp">
 
@@ -49,7 +50,7 @@
                 android:id="@+id/otp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="phone"
+                android:inputType="number"
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -62,24 +63,20 @@
             android:layout_height="wrap_content"
             android:text="Verify"/>
 
-
-
-
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:visibility="invisible">
-
         <ProgressBar
-            android:id="@+id/progressBarVerify"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:id="@+id/progressBarVerify"
+            android:visibility="invisible"/>
+
+
+
+
 
     </LinearLayout>
+
+
 
 
 

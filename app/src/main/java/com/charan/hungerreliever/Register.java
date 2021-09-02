@@ -25,29 +25,34 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Register extends AppCompatActivity {
 
+    // Declaring required variables
     private EditText name, email, password, phone;
     private TextView loginText;
     private Button button;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
     private RadioGroup radioGroup;
-    RadioButton radioButton;
+    private RadioButton radioButton;
+
+    // If user is logged in redirect to dashboard
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            startActivity(new Intent(new Intent(getApplicationContext(),UserDashboard.class)));
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        name = findViewById(R.id.nameRegister);
-        email = findViewById(R.id.emailRegister);
-        password = findViewById(R.id.PasswordRegister);
-        phone = findViewById(R.id.phoneRegister);
-        loginText = findViewById(R.id.textLoginButton);
-        button = findViewById(R.id.buttonContinue);
-        progressBar =findViewById(R.id.progressBarRegister);
-        radioGroup = findViewById(R.id.radioGroup);
-        auth = FirebaseAuth.getInstance();
+        // Initialize the declared variables
+        Initialize();
 
+        // If "Login Text" was clicked redirect to Login Page
         loginText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,29 +64,34 @@ public class Register extends AppCompatActivity {
             }
         });
 
+        // If "Continue button" was clicked ...
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                // Hide the soft input Keyboard
                 InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
                 inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
 
-                int id = radioGroup.getCheckedRadioButtonId();
-                radioButton =  findViewById(id);
-
                 progressBar.setVisibility(View.VISIBLE);
 
-                String  Name = name.getText().toString();
+
+                // To fetch entered details
+                int id = radioGroup.getCheckedRadioButtonId();
+                radioButton =  findViewById(id);
+                String Name = name.getText().toString();
                 String Email =  email.getText().toString();
                 String Phone = phone.getText().toString();
                 String PhonePattern = "^[6-9]\\d{9}$";
-                String  user = "1";
+                String user = "1";
                 String Password = password.getText().toString();
 
+                // If he/she registers for an organisation
                 if(!radioButton.getText().equals("User")){
                     user = "0";
                 }
 
+                // To check text in any input box was left empty or it doesn't match pattern to that specific box : up to line 154
                 if(TextUtils.isEmpty(Name)){
                     progressBar.setVisibility(View.INVISIBLE);
                     name.setError("Name is required.");
@@ -133,6 +143,7 @@ public class Register extends AppCompatActivity {
 
                 }
 
+                // Creating a bundle to pass user details to through further activities
                 Bundle bundle = new Bundle();
                 bundle.putString("Name",Name);
                 bundle.putString("Phone",Phone);
@@ -140,17 +151,21 @@ public class Register extends AppCompatActivity {
                 bundle.putString("Password",Password);
                 bundle.putString("User",user);
 
-
+                // To check user is already registered or not
                 auth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        //if this task is successful user is not registered else user registered until user gives the new email id
                         if(task.isSuccessful()){
 
+                            // now account was to be  deleted as we want the user phone number for verification
                             auth.getCurrentUser().delete();
 
+                            // now user will be redirected to send OTP page
                             progressBar.setVisibility(View.GONE);
                             Intent intent = new Intent(getApplicationContext(),SendOTP.class);
-                            intent.putExtras(bundle);
+                            intent.putExtras(bundle); // passing user data to another activity
                             startActivity(intent);
                             finish();
 
@@ -163,6 +178,19 @@ public class Register extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    // method to initialize the declared variables
+    private void Initialize() {
+        name = findViewById(R.id.nameRegister);
+        email = findViewById(R.id.emailRegister);
+        password = findViewById(R.id.PasswordRegister);
+        phone = findViewById(R.id.phoneRegister);
+        loginText = findViewById(R.id.textLoginButton);
+        button = findViewById(R.id.buttonContinue);
+        progressBar =findViewById(R.id.progressBarRegister);
+        radioGroup = findViewById(R.id.radioGroup);
+        auth = FirebaseAuth.getInstance();
     }
 
 }

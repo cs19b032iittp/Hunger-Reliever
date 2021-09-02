@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
@@ -32,6 +33,7 @@ import java.util.concurrent.TimeUnit;
 
 public class VerifyPhoneNumber extends AppCompatActivity {
 
+    // Declaring required variables
     private Button verify_Button;
     private EditText otp;
     private String verificationCodeBySystem;
@@ -47,6 +49,41 @@ public class VerifyPhoneNumber extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_phone_number);
 
+        // Initialize the declared variables
+        Initialize();
+
+        // If user clicks the verify button
+        verify_Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                progressBar.setVisibility(View.VISIBLE);
+
+                // to hide the soft Input keyboard
+                InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
+                String verification_code = otp.getText().toString();
+                if(!verification_code.isEmpty()){
+
+                    //If input is not empty
+                    PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationCodeBySystem,verification_code);
+                    signIn(credential);
+
+                }
+                else{
+
+                    Toast.makeText(VerifyPhoneNumber.this, "Please Enter OTP", Toast.LENGTH_SHORT).show();
+                    return;
+
+                }
+            }
+        });
+
+    }
+
+    // method to initialize the declared variables
+    private void Initialize() {
         verify_Button = findViewById(R.id.buttonVerify);
         otp = findViewById(R.id.otp);
         bundle = getIntent().getExtras();
@@ -59,24 +96,6 @@ public class VerifyPhoneNumber extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBarVerify);
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
-
-        verify_Button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                progressBar.setVisibility(View.VISIBLE);
-                InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
-                inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                String verification_code = otp.getText().toString();
-                if(!verification_code.isEmpty()){
-                    PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationCodeBySystem,verification_code);
-                    signIn(credential);
-                }
-                else{
-                    Toast.makeText(VerifyPhoneNumber.this, "Please Enter OTP", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
     }
 
     private  void signIn(PhoneAuthCredential credential){
@@ -90,9 +109,6 @@ public class VerifyPhoneNumber extends AppCompatActivity {
                             VerificationCompleted();
                         }
                     });
-                    //Toast.makeText(VerifyPhoneNumber.this, "Account", Toast.LENGTH_SHORT).show();
-                    //startActivity(new Intent(VerifyPhoneNumber.this,DashBoard.class));
-                    //finish();
                 }
                 else{
                     Toast.makeText(VerifyPhoneNumber.this, "User Not Verified!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -101,28 +117,36 @@ public class VerifyPhoneNumber extends AppCompatActivity {
         });
     }
 
+    // method to register user in our database , If he was verified.
     private void VerificationCompleted() {
 
+        // creating user authentication  account
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+                // if task is successful , now we need to create user profile else redirect him to registration page.
                 if(task.isSuccessful()){
+
                     createUserProfile();
-                    progressBar.setVisibility(View.GONE);
-//TODO: user goes to userDasboard and admin goes to admin dashboard
-                    Intent intent = new Intent(VerifyPhoneNumber.this,UserDashboard.class);
+
+                }
+                else {
+                    if(auth.getCurrentUser()!=null){
+                        auth.getCurrentUser().delete();
+                    }
+
+                    Toast.makeText(VerifyPhoneNumber.this, "Error! Account Not Created.\n" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(VerifyPhoneNumber.this,Register.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     startActivity(intent);
                     finish();
-                }
-                else {
-                    Toast.makeText(VerifyPhoneNumber.this, "Error!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     progressBar.setVisibility(View.INVISIBLE);
                 }
             }
         });
     }
 
+    // method to create user profile
     private void createUserProfile() {
         DocumentReference documentReference =firestore.collection("users").document(auth.getCurrentUser().getUid());
         Map<String,Object> data = new HashMap<>();
@@ -131,10 +155,31 @@ public class VerifyPhoneNumber extends AppCompatActivity {
         data.put("email",email);
         data.put("user",user);
 
+        // If successful redirect him to dashboard else return him to registration page
         documentReference.set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(VerifyPhoneNumber.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                Intent intent = new Intent(VerifyPhoneNumber.this,UserDashboard.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
+
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                if(auth.getCurrentUser()!=null){
+                    auth.getCurrentUser().delete();
+                }
+                Toast.makeText(VerifyPhoneNumber.this, "Registration Unsuccessful !\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                Intent intent = new Intent(VerifyPhoneNumber.this,Register.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
             }
         });
     }

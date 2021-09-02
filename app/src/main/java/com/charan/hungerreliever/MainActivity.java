@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // launching a splash activity for 1 sec
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
