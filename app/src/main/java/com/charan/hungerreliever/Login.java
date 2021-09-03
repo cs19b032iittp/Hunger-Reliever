@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -17,26 +18,24 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Map;
 
 public class Login extends AppCompatActivity {
 
 
+    private static final String TAG = "TAG" ;
     // Declaring required variables
     private EditText email, password;
     private TextView registerText,forgotPasswordText;
     private ProgressBar progressBar;
     private Button button;
     private FirebaseAuth firebaseAuth;
-
-    // If user is logged in redirect to dashboard
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(new Intent(getApplicationContext(),UserDashboard.class)));
-            finish();
-        }
-    }
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,7 @@ public class Login extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),Reset.class);
                 intent.putExtra("email",mail);
                 startActivity(intent);
-                finish();
+                //finish(); //TODO
                 progressBar.setVisibility(View.INVISIBLE);
             }
         });
@@ -68,7 +67,7 @@ public class Login extends AppCompatActivity {
                 Intent intent = new Intent(Login.this,Register.class);
                 startActivity(intent);
                 progressBar.setVisibility(View.GONE);
-                finish();
+                //finish() //TODO;
             }
         });
 
@@ -114,12 +113,12 @@ public class Login extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-
+                            login();
                             //If  Login Successful redirect to dashboard
-                            progressBar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(), UserDashboard.class));
-                            finish();
+//                            progressBar.setVisibility(View.INVISIBLE);
+//                            Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+//                            startActivity(new Intent(getApplicationContext(), UserDashboard.class));
+//                            finish();
                         }
                         else {
                             progressBar.setVisibility(View.INVISIBLE);
@@ -131,6 +130,32 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    private void login() {
+        db.collection("profiles")
+                .whereEqualTo("email", firebaseAuth.getCurrentUser().getEmail())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> profile = document.getData();
+                                if (String.valueOf(profile.get("user")).equals("1")) {
+                                    startActivity(new Intent(getApplicationContext(), UserDashboard.class));
+                                    finish();
+                                } else {
+                                    startActivity(new Intent(getApplicationContext(), Orgdashboard.class));
+                                    finish();
+                                }
+                            }
+                        } else {
+                            Toast.makeText(Login.this, "Please Try Again Later!", Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                });
+    }
+
     // method to initialize the declared variables
     private void Initialize() {
         registerText = findViewById(R.id.textRegisterButton);
@@ -140,6 +165,7 @@ public class Login extends AppCompatActivity {
         button = findViewById(R.id.buttonLogin);
         forgotPasswordText = findViewById(R.id.textForgotPassword);
         firebaseAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
     }
 
 }

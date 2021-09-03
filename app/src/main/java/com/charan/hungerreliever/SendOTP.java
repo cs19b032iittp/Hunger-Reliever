@@ -155,7 +155,7 @@ public class SendOTP extends AppCompatActivity {
                 // if task is successful , now we need to create user profile else redirect him to registration page.
                 if(task.isSuccessful()){
 
-                    createUserProfile();
+                    createProfile();
 
                 }
                 else {
@@ -174,19 +174,202 @@ public class SendOTP extends AppCompatActivity {
         });
     }
 
-    // method to create user profile
-    private void createUserProfile() {
-        DocumentReference documentReference =firestore.collection("users").document(auth.getCurrentUser().getUid());
+    private void createProfile() {
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        ProfileClass profile = new ProfileClass(name,email,phone,user);
+        db.collection("profiles").document(auth.getCurrentUser().getUid()).set(profile).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                if(user.equals("1")){
+                    createUser();
+                }
+                else{
+                    createOrganisation();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if(auth.getCurrentUser()!=null){
+                    auth.getCurrentUser().delete();
+                }
+                Toast.makeText(SendOTP.this, "Registration Unsuccessful! Please try Again.", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                Intent intent = new Intent(SendOTP.this,Register.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+
+    }
+
+    private void createOrganisation() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        OrganisationClass organisation = new OrganisationClass(name,email,phone,false,false);
+        db.collection("verifyOrganisations").document(auth.getCurrentUser().getUid()).set(organisation).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(SendOTP.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                Intent intent = new Intent(SendOTP.this,OrganisationDetailsForm.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if(auth.getCurrentUser()!=null){
+                    auth.getCurrentUser().delete();
+                }
+                Toast.makeText(SendOTP.this, "Registration Unsuccessful !\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                Intent intent = new Intent(SendOTP.this,Register.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+    }
+
+    private void createUser() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        UserClass user = new UserClass(name,email,phone);
+        db.collection("users").document(auth.getCurrentUser().getUid()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(SendOTP.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                Intent intent = new Intent(SendOTP.this,UserDashboard.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if(auth.getCurrentUser()!=null){
+                    auth.getCurrentUser().delete();
+                }
+                Toast.makeText(SendOTP.this, "Registration Unsuccessful !\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                Intent intent = new Intent(SendOTP.this,Register.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+    }
+
+
+    /*
+    // method to create  profile in database
+    private void createProfile() {
+        DocumentReference documentReference =firestore.collection("profiles").document(auth.getCurrentUser().getUid());
         Map<String,Object> data = new HashMap<>();
         data.put("name",name);
         data.put("phone",phone);
         data.put("email",email);
         data.put("user",user);
 
-        // If successful redirect him to dashboard else return him to registration page
+        // If successful call respective methods else return him to registration page
         documentReference.set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
+
+                if(user.equals("1")){
+                    createUserProfile();
+                }
+
+                else{
+                    createOrganisationProfile();
+                }
+            }
+
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                if(auth.getCurrentUser()!=null){
+                    auth.getCurrentUser().delete();
+                }
+                Toast.makeText(SendOTP.this, "Registration Unsuccessful !\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                Intent intent = new Intent(SendOTP.this,Register.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+    */
+
+    /*
+    private void createOrganisationProfile() {
+        DocumentReference documentReference =firestore.collection("VerifyOrganisations").document(auth.getCurrentUser().getUid());
+        Map<String,Object> data = new HashMap<>();
+        data.put("name",name);
+        data.put("phone",phone);
+        data.put("email",email);
+        data.put("verificationStatus","0");
+
+        // If successful redirect  to dashboard else return him to registration page
+        documentReference.set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+                Toast.makeText(SendOTP.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                Intent intent = new Intent(SendOTP.this,OrganisationDetailsForm.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
+
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+
+                if(auth.getCurrentUser()!=null){
+                    auth.getCurrentUser().delete();
+                }
+                Toast.makeText(SendOTP.this, "Registration Unsuccessful !\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.GONE);
+                Intent intent = new Intent(SendOTP.this,Register.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+                finish();
+            }
+        });
+    }
+    */
+
+    /*
+    private void createUserProfile() {
+        DocumentReference documentReference =firestore.collection("Users").document(auth.getCurrentUser().getUid());
+        Map<String,Object> data = new HashMap<>();
+        data.put("name",name);
+        data.put("phone",phone);
+        data.put("email",email);
+
+        // If successful redirect  to dashboard else return him to registration page
+        documentReference.set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+
+                if(user.equals("1")){
+                    createUserProfile();
+                }
+
+                else{
+                    createOrganisationProfile();
+                }
+
                 Toast.makeText(SendOTP.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
                 Intent intent = new Intent(SendOTP.this,UserDashboard.class);
@@ -211,4 +394,6 @@ public class SendOTP extends AppCompatActivity {
             }
         });
     }
+    */
+
 }
