@@ -149,7 +149,7 @@ public class VerifyPhoneNumber extends AppCompatActivity {
     private void createProfile() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        ProfileClass profile = new ProfileClass(name,email,phone,user);
+        ProfileClass profile = new ProfileClass(name,email,phone,user,"0","0");
         db.collection("profiles").document(auth.getCurrentUser().getUid()).set(profile).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

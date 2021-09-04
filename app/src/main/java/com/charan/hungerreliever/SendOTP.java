@@ -96,7 +96,7 @@ public class SendOTP extends AppCompatActivity {
             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
 
-                Toast.makeText(SendOTP.this, "OTP Sent to your number", Toast.LENGTH_LONG).show();
+                Toast.makeText(SendOTP.this, "OTP Sent to your number", Toast.LENGTH_SHORT).show();
 
                 // 10 seconds delay to perform auto verification
                 new Handler().postDelayed(new Runnable() {
@@ -152,21 +152,18 @@ public class SendOTP extends AppCompatActivity {
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+
                 // if task is successful , now we need to create user profile else redirect him to registration page.
                 if(task.isSuccessful()){
-
                     createProfile();
-
                 }
                 else {
                     if(auth.getCurrentUser()!=null){
                         auth.getCurrentUser().delete();
                     }
 
-                    Toast.makeText(SendOTP.this, "Error! Account Not Created.\n" + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(SendOTP.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(SendOTP.this,Register.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP| Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    startActivity(intent);
                     finish();
                     progressBar.setVisibility(View.INVISIBLE);
                 }
@@ -177,14 +174,16 @@ public class SendOTP extends AppCompatActivity {
     private void createProfile() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        ProfileClass profile = new ProfileClass(name,email,phone,user);
+        ProfileClass profile = new ProfileClass(name,email,phone,user,"0","0");
         db.collection("profiles").document(auth.getCurrentUser().getUid()).set(profile).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 if(user.equals("1")){
+                    // to create separate profile for user
                     createUser();
                 }
                 else{
+                    //to create separate  profile for organisation
                     createOrganisation();
                 }
             }

@@ -34,16 +34,6 @@ public class Register extends AppCompatActivity {
     private RadioGroup radioGroup;
     private RadioButton radioButton;
 
-    // If user is logged in redirect to dashboard
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if(FirebaseAuth.getInstance().getCurrentUser() != null){
-            startActivity(new Intent(new Intent(getApplicationContext(),UserDashboard.class)));
-            finish();
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

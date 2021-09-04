@@ -114,11 +114,6 @@ public class Login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             login();
-                            //If  Login Successful redirect to dashboard
-//                            progressBar.setVisibility(View.INVISIBLE);
-//                            Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
-//                            startActivity(new Intent(getApplicationContext(), UserDashboard.class));
-//                            finish();
                         }
                         else {
                             progressBar.setVisibility(View.INVISIBLE);
@@ -143,9 +138,20 @@ public class Login extends AppCompatActivity {
                                 if (String.valueOf(profile.get("user")).equals("1")) {
                                     startActivity(new Intent(getApplicationContext(), UserDashboard.class));
                                     finish();
-                                } else {
-                                    startActivity(new Intent(getApplicationContext(), Orgdashboard.class));
-                                    finish();
+                                }
+                                else {
+                                    if(String.valueOf(profile.get("formSubmitted")).equals("0")){
+                                        startActivity(new Intent(new Intent(getApplicationContext(),OrganisationDetailsForm.class)));
+                                        finish();
+                                    }
+                                    else if(String.valueOf(profile.get("verificationStatus")).equals("0")){
+                                        startActivity(new Intent(new Intent(getApplicationContext(),VerificationStatus.class)));
+                                        finish();
+                                    }
+                                    else {
+                                        startActivity(new Intent(new Intent(getApplicationContext(),Orgdashboard.class)));
+                                        finish();
+                                    }
                                 }
                             }
                         } else {
