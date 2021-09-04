@@ -35,7 +35,8 @@ public class Login extends AppCompatActivity {
     private ProgressBar progressBar;
     private Button button;
     private FirebaseAuth firebaseAuth;
-    private FirebaseFirestore db;
+    private FirebaseFirestore db1;
+    private FirebaseFirestore db2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class Login extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(),Reset.class);
                 intent.putExtra("email",mail);
                 startActivity(intent);
-                //finish(); //TODO
+                finish();
                 progressBar.setVisibility(View.INVISIBLE);
             }
         });
@@ -67,7 +68,7 @@ public class Login extends AppCompatActivity {
                 Intent intent = new Intent(Login.this,Register.class);
                 startActivity(intent);
                 progressBar.setVisibility(View.GONE);
-                //finish() //TODO;
+                finish() ;
             }
         });
 
@@ -126,7 +127,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void login() {
-        db.collection("profiles")
+        db1.collection("profiles")
                 .whereEqualTo("email", firebaseAuth.getCurrentUser().getEmail())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -140,23 +141,43 @@ public class Login extends AppCompatActivity {
                                     finish();
                                 }
                                 else {
-                                    if(String.valueOf(profile.get("formSubmitted")).equals("0")){
-                                        startActivity(new Intent(new Intent(getApplicationContext(),OrganisationDetailsForm.class)));
-                                        finish();
-                                    }
-                                    else if(String.valueOf(profile.get("verificationStatus")).equals("0")){
-                                        startActivity(new Intent(new Intent(getApplicationContext(),VerificationStatus.class)));
-                                        finish();
-                                    }
-                                    else {
-                                        startActivity(new Intent(new Intent(getApplicationContext(),Orgdashboard.class)));
-                                        finish();
-                                    }
+                                    organisationStatus();
                                 }
                             }
                         } else {
                             Toast.makeText(Login.this, "Please Try Again Later!", Toast.LENGTH_SHORT).show();
                             progressBar.setVisibility(View.INVISIBLE);
+                        }
+                    }
+                });
+    }
+
+    private void organisationStatus() {
+        db2.collection("verifyOrganisations")
+                .whereEqualTo("email",firebaseAuth.getCurrentUser().getEmail())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> profile = document.getData();
+                                if(String.valueOf(profile.get("formSubmitted")).equals("0")){
+                                    startActivity(new Intent(new Intent(getApplicationContext(),OrganisationDetailsForm.class)));
+                                    finish();
+                                }
+                                else if(String.valueOf(profile.get("verificationStatus")).equals("0")){
+                                    startActivity(new Intent(new Intent(getApplicationContext(),VerificationStatus.class)));
+                                    finish();
+                                }
+                                else {
+                                    startActivity(new Intent(new Intent(getApplicationContext(),Orgdashboard.class)));
+                                    finish();
+                                }
+                            }
+                        } else {
+                            Toast.makeText(Login.this, "Please try again later", Toast.LENGTH_SHORT).show();
+                            Log.d("MainActivity", "Error getting documents: "+ task.getException());
                         }
                     }
                 });
@@ -171,7 +192,8 @@ public class Login extends AppCompatActivity {
         button = findViewById(R.id.buttonLogin);
         forgotPasswordText = findViewById(R.id.textForgotPassword);
         firebaseAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
+        db1 = FirebaseFirestore.getInstance();
+        db2 = FirebaseFirestore.getInstance();
     }
 
 }

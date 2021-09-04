@@ -72,7 +72,7 @@ public class VerifyPhoneNumber extends AppCompatActivity {
 
                 }
                 else{
-
+                    progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(VerifyPhoneNumber.this, "Please Enter OTP", Toast.LENGTH_SHORT).show();
                     return;
 
@@ -111,6 +111,7 @@ public class VerifyPhoneNumber extends AppCompatActivity {
                     });
                 }
                 else{
+                    progressBar.setVisibility(View.INVISIBLE);
                     Toast.makeText(VerifyPhoneNumber.this, "User Not Verified!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -149,7 +150,7 @@ public class VerifyPhoneNumber extends AppCompatActivity {
     private void createProfile() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        ProfileClass profile = new ProfileClass(name,email,phone,user,"0","0");
+        ProfileClass profile = new ProfileClass(name,email,phone,user);
         db.collection("profiles").document(auth.getCurrentUser().getUid()).set(profile).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -180,7 +181,7 @@ public class VerifyPhoneNumber extends AppCompatActivity {
 
     private void createOrganisation() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        OrganisationClass organisation = new OrganisationClass(name,email,phone,false,false);
+        OrganisationClass organisation = new OrganisationClass(name,email,phone,"0","0");
         db.collection("verifyOrganisations").document(auth.getCurrentUser().getUid()).set(organisation).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

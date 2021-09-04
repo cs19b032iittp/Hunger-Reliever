@@ -4,27 +4,36 @@ public class OrganisationClass {
     private String name;
     private String email;
     private String phone;
-    private boolean verificationStatus;
-    private  boolean formSubmitted;
+    private String verificationStatus;
+    private  String formSubmitted;
 
-    public OrganisationClass(String name, String email, String phone,boolean  formSubmitted, boolean verificationStatus) {
+
+    public OrganisationClass() {
+
+    }
+
+    public String getVerificationStatus() {
+        return verificationStatus;
+    }
+
+    public void setVerificationStatus(String verificationStatus) {
+        this.verificationStatus = verificationStatus;
+    }
+
+    public String getFormSubmitted() {
+        return formSubmitted;
+    }
+
+    public void setFormSubmitted(String formSubmitted) {
+        this.formSubmitted = formSubmitted;
+    }
+
+    public OrganisationClass(String name, String email, String phone, String verificationStatus, String formSubmitted) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.verificationStatus = verificationStatus;
-        this.formSubmitted =formSubmitted;
-    }
-
-    public boolean isFormSubmitted() {
-        return formSubmitted;
-    }
-
-    public void setFormSubmitted(boolean formSubmitted) {
         this.formSubmitted = formSubmitted;
-    }
-
-    public OrganisationClass() {
-
     }
 
     public String getName() {
@@ -51,11 +60,7 @@ public class OrganisationClass {
         this.phone = phone;
     }
 
-    public boolean isVerificationStatus() {
-        return verificationStatus;
-    }
 
-    public void setVerificationStatus(boolean verificationStatus) {
-        this.verificationStatus = verificationStatus;
-    }
+
+
 }

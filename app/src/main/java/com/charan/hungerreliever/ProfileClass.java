@@ -5,20 +5,17 @@ public class ProfileClass {
     private String email;
     private String phone;
     private String user;
-    private String formSubmitted;
-    private String verificationStatus;
 
 
     public ProfileClass() {
     }
 
-    public ProfileClass(String name, String email, String phone, String user, String formSubmitted, String verificationStatus) {
+    public ProfileClass(String name, String email, String phone, String user) {
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.user = user;
-        this.formSubmitted = formSubmitted;
-        this.verificationStatus = verificationStatus;
+
     }
 
     public String getName() {
@@ -53,19 +50,4 @@ public class ProfileClass {
         this.user = user;
     }
 
-    public String getFormSubmitted() {
-        return formSubmitted;
-    }
-
-    public void setFormSubmitted(String formSubmitted) {
-        this.formSubmitted = formSubmitted;
-    }
-
-    public String getVerificationStatus() {
-        return verificationStatus;
-    }
-
-    public void setVerificationStatus(String verificationStatus) {
-        this.verificationStatus = verificationStatus;
-    }
 }

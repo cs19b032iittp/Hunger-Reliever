@@ -122,7 +122,7 @@ public class OrganisationDetailsForm extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
 
-                        documentReference.update("formSubmitted",true);
+                        documentReference.update("formSubmitted","1");
                         Toast.makeText(OrganisationDetailsForm.this, "Submitted Successfully", Toast.LENGTH_SHORT).show();
                         progressBar.setVisibility(View.GONE);
                         Intent intent = new Intent(OrganisationDetailsForm.this,VerificationStatus.class);

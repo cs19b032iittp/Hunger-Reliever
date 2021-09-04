@@ -22,15 +22,16 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
-    private FirebaseFirestore db;
-    private DocumentReference reference;
+    private FirebaseFirestore db1;
+    private FirebaseFirestore db2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         firebaseAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
+        db1 = FirebaseFirestore.getInstance();
+        db2 = FirebaseFirestore.getInstance();
 
         // launching a splash activity
         new Handler().postDelayed(new Runnable() {
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
 
                 if(FirebaseAuth.getInstance().getCurrentUser() != null){
-                    db.collection("profiles")
+                    db1.collection("profiles")
                             .whereEqualTo("email",firebaseAuth.getCurrentUser().getEmail())
                             .get()
                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -52,18 +53,7 @@ public class MainActivity extends AppCompatActivity {
                                                 finish();
                                             }
                                             else {
-                                                if(String.valueOf(profile.get("formSubmitted")).equals("0")){
-                                                    startActivity(new Intent(new Intent(getApplicationContext(),OrganisationDetailsForm.class)));
-                                                    finish();
-                                                }
-                                                else if(String.valueOf(profile.get("verificationStatus")).equals("0")){
-                                                    startActivity(new Intent(new Intent(getApplicationContext(),VerificationStatus.class)));
-                                                    finish();
-                                                }
-                                                else {
-                                                    startActivity(new Intent(new Intent(getApplicationContext(),Orgdashboard.class)));
-                                                    finish();   
-                                                }
+                                                organisationStatus();
                                             }
                                         }
                                     } else {
@@ -79,6 +69,37 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 }
             }
-        },300);
+        },100);
    }
+
+    private void organisationStatus() {
+        db2.collection("verifyOrganisations")
+                .whereEqualTo("email",firebaseAuth.getCurrentUser().getEmail())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> profile = document.getData();
+                                if(String.valueOf(profile.get("formSubmitted")).equals("0")){
+                                    startActivity(new Intent(new Intent(getApplicationContext(),OrganisationDetailsForm.class)));
+                                    finish();
+                                }
+                                else if(String.valueOf(profile.get("verificationStatus")).equals("0")){
+                                    startActivity(new Intent(new Intent(getApplicationContext(),VerificationStatus.class)));
+                                    finish();
+                                }
+                                else {
+                                    startActivity(new Intent(new Intent(getApplicationContext(),Orgdashboard.class)));
+                                    finish();
+                                }
+                            }
+                        } else {
+                            Toast.makeText(MainActivity.this, "Please try again later", Toast.LENGTH_SHORT).show();
+                            Log.d("MainActivity", "Error getting documents: "+ task.getException());
+                        }
+                    }
+                });
+    }
 }

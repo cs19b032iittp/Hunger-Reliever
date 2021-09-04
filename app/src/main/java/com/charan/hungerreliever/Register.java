@@ -157,7 +157,7 @@ public class Register extends AppCompatActivity {
                             Intent intent = new Intent(getApplicationContext(),SendOTP.class);
                             intent.putExtras(bundle); // passing user data to another activity
                             startActivity(intent);
-                            //finish(); //TODO
+                            finish();
 
                         }
                         else {

@@ -42,7 +42,8 @@ public class SendOTP extends AppCompatActivity {
     private ProgressBar progressBar;
     private  String name ,email, phone, password, user;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBacks;
-    private FirebaseFirestore firestore;
+    private FirebaseFirestore db1;
+    private FirebaseFirestore db2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +143,8 @@ public class SendOTP extends AppCompatActivity {
         password = bundle.getString("Password");
         user = bundle.getString("User");
         progressBar = findViewById(R.id.progressbarSendOTP);
-        firestore = FirebaseFirestore.getInstance();
+        db1 = FirebaseFirestore.getInstance();
+        db2 = FirebaseFirestore.getInstance();
     }
 
     // method to register user in our database , If he was verified.
@@ -174,7 +176,7 @@ public class SendOTP extends AppCompatActivity {
     private void createProfile() {
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        ProfileClass profile = new ProfileClass(name,email,phone,user,"0","0");
+        ProfileClass profile = new ProfileClass(name,email,phone,user);
         db.collection("profiles").document(auth.getCurrentUser().getUid()).set(profile).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -207,7 +209,7 @@ public class SendOTP extends AppCompatActivity {
 
     private void createOrganisation() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        OrganisationClass organisation = new OrganisationClass(name,email,phone,false,false);
+        OrganisationClass organisation = new OrganisationClass(name,email,phone,"0","0");
         db.collection("verifyOrganisations").document(auth.getCurrentUser().getUid()).set(organisation).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
