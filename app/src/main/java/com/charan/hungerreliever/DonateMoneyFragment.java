@@ -2,6 +2,7 @@ package com.charan.hungerreliever;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Map;
 
 public class DonateMoneyFragment extends Fragment implements RecyclerViewClickListener{
 
@@ -32,6 +43,8 @@ public class DonateMoneyFragment extends Fragment implements RecyclerViewClickLi
     private RecyclerViewClickListener recyclerViewClickListener;
     RecyclerView recyclerView;
     ArrayList<RemoveDataModel> list;
+    FirebaseFirestore db;
+    FirebaseAuth firebaseAuth;
 
     public DonateMoneyFragment() {
         // Required empty public constructor
@@ -58,6 +71,7 @@ public class DonateMoneyFragment extends Fragment implements RecyclerViewClickLi
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        db = FirebaseFirestore.getInstance();
         if(getArguments()!=null){
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -71,30 +85,56 @@ public class DonateMoneyFragment extends Fragment implements RecyclerViewClickLi
         recyclerView = view.findViewById(R.id.org_upi_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+//        list.add(new RemoveDataModel("org2","org2@okicici"));
+//        list.add(new RemoveDataModel("org3","org3@okaxis"));
+//        list.add(new RemoveDataModel("org4","org4@okgs"));
+//        list.add(new RemoveDataModel("org5","org5@okbank"));
+//        list.add(new RemoveDataModel("org6","org6@oklvb"));
+//        list.add(new RemoveDataModel("org7","org7@oksrb"));
+//        list.add(new RemoveDataModel("org8","org8@oksb"));
+//        list.add(new RemoveDataModel("org9","org9@okrbi"));
+//        list.add(new RemoveDataModel("org10","org10@oksbi"));
+//        list.add(new RemoveDataModel("org11","org11@oksbi"));
+//        list.add(new RemoveDataModel("org12","org12@okicici"));
+//        list.add(new RemoveDataModel("org13","org13@okaxis"));
+//        list.add(new RemoveDataModel("org14","org14@okgs"));
+//        list.add(new RemoveDataModel("org15","org15@okbank"));
+//        list.add(new RemoveDataModel("org16","org16@oklvb"));
+//        list.add(new RemoveDataModel("org17","org17@oksrb"));
+//        list.add(new RemoveDataModel("org18","org18@oksb"));
+//        list.add(new RemoveDataModel("org19","org19@okrbi"));
+//        list.add(new RemoveDataModel("org20","org20@oksbi"));
 
-        list = new ArrayList<>();
-        list.add(new RemoveDataModel("org1","org1@oksbi"));
-        list.add(new RemoveDataModel("org2","org2@okicici"));
-        list.add(new RemoveDataModel("org3","org3@okaxis"));
-        list.add(new RemoveDataModel("org4","org4@okgs"));
-        list.add(new RemoveDataModel("org5","org5@okbank"));
-        list.add(new RemoveDataModel("org6","org6@oklvb"));
-        list.add(new RemoveDataModel("org7","org7@oksrb"));
-        list.add(new RemoveDataModel("org8","org8@oksb"));
-        list.add(new RemoveDataModel("org9","org9@okrbi"));
-        list.add(new RemoveDataModel("org10","org10@oksbi"));
-        list.add(new RemoveDataModel("org11","org11@oksbi"));
-        list.add(new RemoveDataModel("org12","org12@okicici"));
-        list.add(new RemoveDataModel("org13","org13@okaxis"));
-        list.add(new RemoveDataModel("org14","org14@okgs"));
-        list.add(new RemoveDataModel("org15","org15@okbank"));
-        list.add(new RemoveDataModel("org16","org16@oklvb"));
-        list.add(new RemoveDataModel("org17","org17@oksrb"));
-        list.add(new RemoveDataModel("org18","org18@oksb"));
-        list.add(new RemoveDataModel("org19","org19@okrbi"));
-        list.add(new RemoveDataModel("org20","org20@oksbi"));
-        setOnClickListener();
-        recyclerView.setAdapter(new RemoveAdapter(list, this));
+
+        db = FirebaseFirestore.getInstance();
+
+        db.collection("verifyOrganisations")
+                .whereEqualTo("verificationStatus","1")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            list = new ArrayList<>();
+                            list.add(new RemoveDataModel("org1","org1@oksbi"));
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> profile = document.getData();
+                                list.add(new RemoveDataModel(String.valueOf(profile.get("name")),String.valueOf(profile.get("upi_id"))));
+                            }
+
+                            setOnClickListener();
+                            recyclerView.setAdapter(new RemoveAdapter(list, DonateMoneyFragment.this));
+
+                        } else {
+                            Toast.makeText(getActivity(), "please try again later", Toast.LENGTH_SHORT).show();
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+
+                    private void add(String name, String upi_id) {
+                        list.add(new RemoveDataModel( name,upi_id ));
+                    }
+                });
 
         return view;
     }
