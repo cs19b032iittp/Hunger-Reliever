@@ -38,6 +38,7 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
         if(savedInstanceState==null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new DonateFoodFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_food_donate);
@@ -51,9 +52,10 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new DonateFoodFragment()).commit();
                 break;
             case R.id.nav_money_donate:
-                Intent intent2 = new Intent(UserDashboard.this,UpiPayment.class);
-                startActivity(intent2);
-                finish();
+//                Intent intent2 = new Intent(UserDashboard.this,UpiPayment.class);
+//                startActivity(intent2);
+//                finish();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new DonateMoneyFragment()).commit();
                 break;
             case R.id.nav_logout:
                 FirebaseAuth.getInstance().signOut();

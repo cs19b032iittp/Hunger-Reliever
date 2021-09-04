@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 
 public class UpiPayment extends AppCompatActivity {
+    private String org, upi;
+    private Bundle bundle;
     EditText amount, note, name, upivirtualid;
     Button send;
     String TAG ="main";
@@ -31,6 +33,11 @@ public class UpiPayment extends AppCompatActivity {
         note = (EditText)findViewById(R.id.note);
         name = (EditText) findViewById(R.id.name);
         upivirtualid =(EditText) findViewById(R.id.upi_id);
+        bundle = getIntent().getExtras();
+        org = bundle.getString("org");
+        upi = bundle.getString("upi");
+        upivirtualid.setText(upi);
+        name.setText(org);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
