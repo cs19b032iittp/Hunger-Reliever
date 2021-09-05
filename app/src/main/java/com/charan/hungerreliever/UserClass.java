@@ -4,14 +4,16 @@ public class UserClass {
     private String name;
     private String email;
     private String phone;
+    private int foodDonations;
 
     public UserClass() {
     }
 
-    public UserClass(String name, String email, String phone) {
+    public UserClass(String name, String email, String phone, int foodDonations) {
         this.name = name;
         this.email = email;
         this.phone = phone;
+        this.foodDonations = foodDonations;
     }
 
     public String getName() {
@@ -38,4 +40,11 @@ public class UserClass {
         this.phone = phone;
     }
 
+    public int getFoodDonations() {
+        return foodDonations;
+    }
+
+    public void setFoodDonations(int foodDonations) {
+        this.foodDonations = foodDonations;
+    }
 }

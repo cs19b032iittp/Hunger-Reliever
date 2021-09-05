@@ -211,7 +211,7 @@ public class VerifyPhoneNumber extends AppCompatActivity {
 
     private void createUser() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        UserClass user = new UserClass(name,email,phone);
+        UserClass user = new UserClass(name,email,phone,0);
         db.collection("users").document(auth.getCurrentUser().getUid()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

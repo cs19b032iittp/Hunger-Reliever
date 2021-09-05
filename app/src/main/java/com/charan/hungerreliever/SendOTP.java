@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.FileObserver;
 import android.os.Handler;
@@ -26,6 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -180,6 +182,7 @@ public class SendOTP extends AppCompatActivity {
         db.collection("profiles").document(auth.getCurrentUser().getUid()).set(profile).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
+
                 if(user.equals("1")){
                     // to create separate profile for user
                     createUser();
@@ -237,9 +240,11 @@ public class SendOTP extends AppCompatActivity {
 
     }
 
+
     private void createUser() {
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        UserClass user = new UserClass(name,email,phone);
+        UserClass user = new UserClass(name,email,phone,0);
         db.collection("users").document(auth.getCurrentUser().getUid()).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

@@ -59,6 +59,7 @@ public class DonateMoneyFragment extends Fragment implements RecyclerViewClickLi
      * @param param2 Parameter 2.
      * @return A new instance of fragment DataFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static DonateFoodFragment newInstance(String param1, String param2){
         DonateFoodFragment fragment = new DonateFoodFragment();
