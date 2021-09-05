@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class HomeOrgFragment extends Fragment {
-
+//when button was clicked
     private Button searchForDonors;
     @Nullable
     @Override
@@ -20,6 +20,7 @@ public class HomeOrgFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_org_home, container, false);
         searchForDonors = (Button) view.findViewById(R.id.search_for_donors);
         searchForDonors.setOnClickListener(new View.OnClickListener() {
+            //open new activity
             @Override
             public void onClick(View view) {
                 openFoodDonatersListActivity();
