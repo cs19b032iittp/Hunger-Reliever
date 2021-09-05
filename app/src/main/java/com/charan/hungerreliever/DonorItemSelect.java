@@ -2,6 +2,7 @@ package com.charan.hungerreliever;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,7 +31,7 @@ public class DonorItemSelect extends AppCompatActivity {
     private TextView donorName, donorMobile, donorAddress, foodName, foodQuantity, foodAdder;
     private String donor, email, mobile,address,quantity ,city, food ,adder;
     private Button accept;
-    FirebaseFirestore db ,db2,db3;
+    FirebaseFirestore db ,db2,db3,db4;
     FirebaseAuth auth;
 
     @Override
@@ -49,6 +50,7 @@ public class DonorItemSelect extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         db2 = FirebaseFirestore.getInstance();
         db3 = FirebaseFirestore.getInstance();
+        db4 = FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
         accept = findViewById(R.id.accept_donation_btn);
 
@@ -132,7 +134,35 @@ public class DonorItemSelect extends AppCompatActivity {
                         Toast.makeText(DonorItemSelect.this, "Please Try Later.\n"+ e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+
+// Add a new document with a generated id.
+                //private String donor, email, mobile,address,quantity ,city, food ,adder;
+                Map<String, Object> data2 = new HashMap<>();
+                data2.put("donor",donor);
+                data2.put("user_email",email);
+                data2.put("food_name",food);
+                data2.put("address", address+" , " + city);
+                data2.put("org_email",auth.getCurrentUser().getEmail());
+
+                db4.collection("org donations")
+                        .add(data2)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Log.d("TAG", "DocumentSnapshot written with ID: " + documentReference.getId());
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w("TAG", "Error adding document", e);
+                            }
+                        });
+
+
+
             }
+
         });
 
     }

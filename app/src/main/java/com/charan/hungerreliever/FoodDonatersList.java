@@ -2,6 +2,7 @@ package com.charan.hungerreliever;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -30,8 +31,8 @@ public class FoodDonatersList extends AppCompatActivity {
     Adapter adapter;
     private RecyclerViewClickListener listener;
 
-    FirebaseAuth auth;
-    FirebaseFirestore db;
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -89,9 +90,6 @@ public class FoodDonatersList extends AppCompatActivity {
         listener = new RecyclerViewClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-//                Toast.makeText(FoodDonatersList.this, list.get(position).getEmail()+"\n,"+list.get(position).getQuantity() +
-//                        "\n,"+list.get(position).getCity(), Toast.LENGTH_SHORT).show();
-
                 Intent intent = new Intent(getApplicationContext(), DonorItemSelect.class);
                 Bundle bundle = new Bundle();
                 bundle.putString("email",list.get(position).getEmail());

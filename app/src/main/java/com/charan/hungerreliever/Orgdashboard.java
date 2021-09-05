@@ -99,7 +99,9 @@ public class Orgdashboard extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.org_fragment_container, new ProfileOrgFragment()).commit();
                 break;
             case R.id.org_nav_donations_received:
-                getSupportFragmentManager().beginTransaction().replace(R.id.org_fragment_container, new DonationsFragment()).commit();
+                Intent intent2 = new Intent(Orgdashboard.this,AcceptedDonations.class);
+                startActivity(intent2);
+                //getSupportFragmentManager().beginTransaction().replace(R.id.org_fragment_container, new DonationsFragment()).commit();
                 break;
             case R.id.org_nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.org_fragment_container, new HomeOrgFragment()).commit();
