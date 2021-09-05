@@ -30,7 +30,7 @@ import com.google.firebase.firestore.SetOptions;
 import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
-
+// DonateFoodFragment Class
 public class DonateFoodFragment extends Fragment {
 
     private static final String TAG = "TAG";

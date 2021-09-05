@@ -25,6 +25,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Map;
 
+// login class
 public class Login extends AppCompatActivity {
 
 
@@ -73,7 +74,7 @@ public class Login extends AppCompatActivity {
         });
 
 
-        // If "Login button" was clicked ...
+        // If "Login button" was clicked .....
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

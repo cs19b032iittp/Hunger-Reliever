@@ -30,6 +30,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Map;
 
+// DonateMoneyFragment Class
 public class DonateMoneyFragment extends Fragment implements RecyclerViewClickListener{
 
 

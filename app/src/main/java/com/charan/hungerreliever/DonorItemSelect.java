@@ -26,6 +26,7 @@ import com.google.firebase.firestore.SetOptions;
 import java.util.HashMap;
 import java.util.Map;
 
+//
 public class DonorItemSelect extends AppCompatActivity {
 
     private TextView donorName, donorMobile, donorAddress, foodName, foodQuantity, foodAdder;
@@ -136,7 +137,6 @@ public class DonorItemSelect extends AppCompatActivity {
                 });
 
 // Add a new document with a generated id.
-                //private String donor, email, mobile,address,quantity ,city, food ,adder;
                 Map<String, Object> data2 = new HashMap<>();
                 data2.put("donor",donor);
                 data2.put("user_email",email);

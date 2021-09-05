@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+// Donations Fragment class
 public class DonationsFragment extends Fragment {
 
     private Button accepted,completed;

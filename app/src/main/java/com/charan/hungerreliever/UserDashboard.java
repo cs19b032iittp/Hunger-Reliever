@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
-
+// userDashboard class
 public class UserDashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
@@ -55,6 +55,7 @@ public class UserDashboard extends AppCompatActivity implements NavigationView.O
 //                Intent intent2 = new Intent(UserDashboard.this,UpiPayment.class);
 //                startActivity(intent2);
 //                finish();
+//
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new DonateMoneyFragment()).commit();
                 break;
             case R.id.nav_logout:

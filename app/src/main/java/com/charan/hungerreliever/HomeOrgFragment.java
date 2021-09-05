@@ -11,8 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+// Organisation home page
 public class HomeOrgFragment extends Fragment {
-//when button was clicked
+    //when button was clicked
     private Button searchForDonors;
     @Nullable
     @Override

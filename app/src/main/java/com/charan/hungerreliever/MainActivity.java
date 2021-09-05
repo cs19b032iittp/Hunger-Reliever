@@ -20,6 +20,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Map;
 
+// starting activity
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore db1;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         db1 = FirebaseFirestore.getInstance();
         db2 = FirebaseFirestore.getInstance();
 
-        // launching a splash activity
+        // launching a splash activity.
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 }
             }
-        },0);
+        },10);
    }
 
     private void organisationStatus() {

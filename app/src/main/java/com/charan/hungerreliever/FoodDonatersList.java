@@ -22,6 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.Map;
 
+//  FoodDonatersList Class
 public class FoodDonatersList extends AppCompatActivity {
 
 

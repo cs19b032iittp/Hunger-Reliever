@@ -5,6 +5,7 @@ import android.app.Application;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
+// Offline Settings
 public class Offline extends Application {
     FirebaseFirestore db;
     @Override

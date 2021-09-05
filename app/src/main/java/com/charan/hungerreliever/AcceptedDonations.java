@@ -22,7 +22,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Map;
-
+// Accepted Donations Class
 public class AcceptedDonations extends AppCompatActivity {
 
     private RecyclerView acceptedRV;

@@ -18,7 +18,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Map;
-
+// CompletedDonations class
 public class CompletedDonations extends AppCompatActivity {
 
     private RecyclerView acceptedRV;

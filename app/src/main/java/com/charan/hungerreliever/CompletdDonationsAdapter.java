@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-
+// CompletdDonationsAdapter class
 public class CompletdDonationsAdapter extends RecyclerView.Adapter<CompletdDonationsAdapter.Viewholder> {
 
     private Context context;

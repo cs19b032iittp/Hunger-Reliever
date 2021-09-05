@@ -18,6 +18,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Map;
 
+// Verification status class
 public class VerificationStatus extends AppCompatActivity {
     private FirebaseAuth firebaseAuth ;
     private FirebaseFirestore db;

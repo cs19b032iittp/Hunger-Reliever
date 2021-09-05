@@ -23,6 +23,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Map;
 
+// Organisation Dashboard
 public class Orgdashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout orgDrawer;
@@ -101,7 +102,7 @@ public class Orgdashboard extends AppCompatActivity implements NavigationView.On
             case R.id.org_nav_donations_received:
                 Intent intent2 = new Intent(Orgdashboard.this,AcceptedDonations.class);
                 startActivity(intent2);
-                //getSupportFragmentManager().beginTransaction().replace(R.id.org_fragment_container, new DonationsFragment()).commit();
+                ///getSupportFragmentManager().beginTransaction().replace(R.id.org_fragment_container, new DonationsFragment()).commit();
                 break;
             case R.id.org_nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.org_fragment_container, new HomeOrgFragment()).commit();

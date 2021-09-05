@@ -27,6 +27,7 @@ import com.google.firebase.firestore.SetOptions;
 import java.util.HashMap;
 import java.util.Map;
 
+// for Organisation class
 public class OrganisationDetailsForm extends AppCompatActivity {
 
     // Declaring required variables
@@ -53,7 +54,7 @@ public class OrganisationDetailsForm extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
 
-        // If "button" was clicked ...
+        // If "button" was clicked ....
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

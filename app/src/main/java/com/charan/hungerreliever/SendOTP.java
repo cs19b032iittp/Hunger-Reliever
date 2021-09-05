@@ -35,6 +35,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+
+// Phone verification class
 public class SendOTP extends AppCompatActivity {
 
     // Declaring required variables
@@ -273,7 +275,7 @@ public class SendOTP extends AppCompatActivity {
     }
 
 
-    /*
+    /*..
     // method to create  profile in database
     private void createProfile() {
         DocumentReference documentReference =firestore.collection("profiles").document(auth.getCurrentUser().getUid());

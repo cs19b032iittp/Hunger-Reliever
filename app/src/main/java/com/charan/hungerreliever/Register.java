@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+// for creating an account
 public class Register extends AppCompatActivity {
 
     // Declaring required variables
@@ -133,7 +134,7 @@ public class Register extends AppCompatActivity {
 
                 }
 
-                // Creating a bundle to pass user details to through further activities
+                // Creating a bundle to pass user details to through further activities.
                 Bundle bundle = new Bundle();
                 bundle.putString("Name",Name);
                 bundle.putString("Phone",Phone);

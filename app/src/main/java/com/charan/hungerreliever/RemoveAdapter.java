@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-
+// Adapter for Recycler view
 public class RemoveAdapter extends  RecyclerView.Adapter<RemoveAdapter.MyViewHolder>{
 
     ArrayList<RemoveDataModel> dataHolder;

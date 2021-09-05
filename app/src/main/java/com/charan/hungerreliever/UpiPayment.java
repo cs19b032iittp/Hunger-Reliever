@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 
+//upi payment class
 public class UpiPayment extends AppCompatActivity {
     private String org, upi;
     private Bundle bundle;
@@ -64,7 +65,7 @@ public class UpiPayment extends AppCompatActivity {
                 .appendQueryParameter("pn", name)
                 //.appendQueryParameter("mc", "")
                 //.appendQueryParameter("tid", "02125412")
-                //.appendQueryParameter("tr", "25584584")
+                //.appendQueryParameter("tr", "25584584").
                 .appendQueryParameter("tn", note)
                 .appendQueryParameter("am", amount)
                 .appendQueryParameter("cu", "INR")

@@ -1,5 +1,6 @@
 package com.charan.hungerreliever;
 
+//helper Class
 public class ProfileClass {
     private String name;
     private String email;

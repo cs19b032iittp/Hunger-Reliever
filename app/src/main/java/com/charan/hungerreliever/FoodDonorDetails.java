@@ -1,5 +1,6 @@
 package com.charan.hungerreliever;
 
+// FoodDonorDetails Class
 public class FoodDonorDetails {
 
     private String email,quantity,  city;

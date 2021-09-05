@@ -31,6 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
+// phone verification class
 public class VerifyPhoneNumber extends AppCompatActivity {
 
     // Declaring required variables

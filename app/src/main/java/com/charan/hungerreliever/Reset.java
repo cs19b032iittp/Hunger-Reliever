@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
+//for forgot password
 public class Reset extends AppCompatActivity {
 
     // Declaring required variables
@@ -37,7 +38,7 @@ public class Reset extends AppCompatActivity {
         // Initialize the declared variables
         Initialize();
 
-        // If "Send button" was clicked reset link will be sent to their given email
+        // If "Send button" was clicked reset link will be sent to their given email.
         resetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

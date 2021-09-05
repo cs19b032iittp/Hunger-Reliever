@@ -1,5 +1,6 @@
 package com.charan.hungerreliever;
 
+// helper class
 public class RemoveDataModel {
     String org, upi;
 
