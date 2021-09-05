@@ -70,12 +70,17 @@ public class DonateFoodFragment extends Fragment {
                 DocumentReference documentReference =db1.collection("food donations").document(auth.getCurrentUser().getEmail());
                 Map<String,Object> data = new HashMap<>();
 
-                data.put("name",food_);
+                data.put("food",food_);
                 data.put("quantity",quantity_);
                 data.put("adders",adders_);
                 data.put("address",address_);
                 data.put("city",city_);
+                data.put("email",auth.getCurrentUser().getEmail());
                 data.put("status",false);
+
+                //org name; org.mobile;
+
+
 
                 documentReference.set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override

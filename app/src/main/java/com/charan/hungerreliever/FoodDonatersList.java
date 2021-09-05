@@ -3,13 +3,23 @@ package com.charan.hungerreliever;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import java.util.ArrayList;
+import java.util.Map;
 
 public class FoodDonatersList extends AppCompatActivity {
 
@@ -20,44 +30,48 @@ public class FoodDonatersList extends AppCompatActivity {
     Adapter adapter;
     private RecyclerViewClickListener listener;
 
+    FirebaseAuth auth;
+    FirebaseFirestore db;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donaters_recycler_view);
 
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         initData();
-        initRecyclerView();
 
 
     }
 
     private void initData() {
 
-        list = new ArrayList<>();
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
-        list.add(new FoodDonorDetails("Name", "0000000000","address"));
+
+        db.collection("food donations")
+                .whereEqualTo("status",false)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            list = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Map<String, Object> profile = document.getData();
+                                list.add(new FoodDonorDetails(String.valueOf(profile.get("email")),
+                                        String.valueOf(profile.get("quantity")),
+                                        String.valueOf(profile.get("city"))));
+
+                            }
+                            initRecyclerView();
+                        }
+                        else {
+                            Toast.makeText(FoodDonatersList.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
     }
 
     private void initRecyclerView() {
@@ -75,12 +89,14 @@ public class FoodDonatersList extends AppCompatActivity {
         listener = new RecyclerViewClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+//                Toast.makeText(FoodDonatersList.this, list.get(position).getEmail()+"\n,"+list.get(position).getQuantity() +
+//                        "\n,"+list.get(position).getCity(), Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(getApplicationContext(), DonorItemSelect.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("name",list.get(position).getDonor());
-                bundle.putString("mobile",list.get(position).getMobile());
-                bundle.putString("address",list.get(position).getAddress());
-//TODO : also keep food details in the bundle
+                bundle.putString("email",list.get(position).getEmail());
+                bundle.putString("quantity",list.get(position).getQuantity());
+                bundle.putString("city",list.get(position).getCity());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

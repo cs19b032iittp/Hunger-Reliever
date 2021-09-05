@@ -2,36 +2,38 @@ package com.charan.hungerreliever;
 
 public class FoodDonorDetails {
 
-    private String donor,mobile,  address;
+    private String email,quantity,  city;
 
-
-    public FoodDonorDetails(String donor, String mobile, String address) {
-        this.donor = donor;
-        this.mobile = mobile;
-        this.address = address;
+    public FoodDonorDetails(String food, String quantity, String city) {
+        this.email = food;
+        this.quantity = quantity;
+        this.city = city;
     }
 
-    public String getDonor() {
-        return donor;
+    public FoodDonorDetails() {
     }
 
-    public void setDonor(String donor) {
-        this.donor = donor;
+    public String getEmail() {
+        return email;
     }
 
-    public String getMobile() {
-        return mobile;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public String getQuantity() {
+        return quantity;
     }
 
-    public String getAddress() {
-        return address;
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

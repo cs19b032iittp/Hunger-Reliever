@@ -31,9 +31,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String donorName = list.get(position).getDonor();
-        String address = list.get(position).getAddress();
-        String mobile = list.get(position).getMobile();
+        String donorName = list.get(position).getEmail();
+        String address = list.get(position).getQuantity();
+        String mobile = list.get(position).getCity();
 
         holder.setData(donorName,mobile,address);
 
