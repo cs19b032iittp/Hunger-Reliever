@@ -19,7 +19,7 @@ public class FoodDonatersList extends AppCompatActivity {
     ArrayList<FoodDonorDetails> list;
     Adapter adapter;
     private RecyclerViewClickListener listener;
-
+//opens a recycler view of donors and respective food item
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +33,7 @@ public class FoodDonatersList extends AppCompatActivity {
     }
 
     private void initData() {
-
+//the lists contain name,mobile number and address
         list = new ArrayList<>();
         list.add(new FoodDonorDetails("Name", "0000000000","address"));
         list.add(new FoodDonorDetails("Name", "0000000000","address"));
@@ -82,6 +82,7 @@ public class FoodDonatersList extends AppCompatActivity {
                 bundle.putString("address",list.get(position).getAddress());
 //TODO : also keep food details in the bundle
                 intent.putExtras(bundle);
+                //after clicking on respective item details of the owner is shown
                 startActivity(intent);
             }
         };
