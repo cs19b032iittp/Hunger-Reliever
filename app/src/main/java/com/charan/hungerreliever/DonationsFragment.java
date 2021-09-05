@@ -25,12 +25,7 @@ public class DonationsFragment extends Fragment {
         completed = (Button) view.findViewById(R.id.completedDonationsButton);
 
 
-        accepted.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-            }
-        });
 
         return view;
 
