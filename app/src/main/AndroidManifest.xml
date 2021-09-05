@@ -42,6 +42,10 @@
         <activity
             android:name=".Orgdashboard"
             android:exported="true" />
+        <activity android:name=".FoodDonatersList"
+            android:exported="true"/>
+        <activity android:name=".DonorItemSelect"
+            android:exported="true"/>
         <activity
             android:name=".MainActivity"
             android:exported="true" >
