@@ -29,7 +29,7 @@
             android:textSize="18sp"
             android:textStyle="italic"
             android:layout_toRightOf="@+id/text_org_name"
-            android:text="org@okbank"
+            android:text="UPI id"
             android:id="@+id/text_org_upi"/>
 
 

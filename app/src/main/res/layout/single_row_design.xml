@@ -8,38 +8,43 @@
     android:elevation="8dp"
     app:cardUseCompatPadding="true">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
         tools:ignore="MissingConstraints">
 
         <TextView
+            android:id="@+id/org_upi_list_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/org_upi_list_name"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
             android:text="Organization"
-            android:textColor="#000000"/>
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/org_upi_list_upi"
-            android:layout_marginLeft="50dp"
-            android:layout_marginRight="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/org_upi_list_name"
-            android:layout_marginTop="10dp"
-            android:textStyle="italic"
-            android:textSize="18sp"
+            android:text="UPI id"
             android:textColor="#606061"
-            android:text="org@okbank"/>
+            android:textSize="10sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/org_upi_list_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.403"
+            app:layout_constraintStart_toEndOf="@+id/org_upi_list_name"
+            app:layout_constraintTop_toTopOf="@+id/org_upi_list_name"
+            app:layout_constraintVertical_bias="0.0" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
