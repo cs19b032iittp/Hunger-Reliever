@@ -11,20 +11,20 @@
         android:layout_centerHorizontal="true"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:textColor="@color/zero_hunger"
         android:id="@+id/donate_indicator"/>
 
     <EditText
+        android:id="@+id/food_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/donate_indicator"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="40dp"
+        android:layout_marginTop="50dp"
         android:layout_marginRight="40dp"
-        android:layout_marginTop="100dp"
-        android:hint="Regional name of the food"
-        android:id="@+id/food_name"/>
+        android:hint="Regional name of the food" />
 
     <EditText
         android:layout_width="match_parent"
@@ -46,22 +46,52 @@
         android:id="@+id/quantity_example"/>
 
     <EditText
+        android:id="@+id/food_adders"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_below="@+id/quantity_example"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
         android:layout_marginTop="27dp"
-        android:hint="Adders of the food"
-        android:id="@+id/food_adders"/>
+        android:layout_marginRight="40dp"
+        android:hint="Adders of the food" />
+
+    <EditText
+        android:id="@+id/user_current_address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/food_adders"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="40dp"
+        android:hint="Please enter valid current address" />
+
+    <EditText
+        android:id="@+id/user_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/user_current_address"
+        android:hint="Please enter complete city name"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/user_city"
+        android:text="E.g. : HYDERABAD✔, HYD❌"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="3dp"
+        android:id="@+id/eg_city"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/food_adders"
+        android:layout_below="@+id/eg_city"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="27dp"
         android:text="donate"
         android:textColor="@color/black"
         android:id="@+id/donate_food_btn"/>
