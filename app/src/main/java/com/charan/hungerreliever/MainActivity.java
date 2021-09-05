@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 }
             }
-        },100);
+        },0);
    }
 
     private void organisationStatus() {
