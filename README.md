@@ -18,7 +18,7 @@
 
 # Hunger Reliever
 
-- There are two different users in our app (Donor or Organisation ).
+- There are two different users in our app (Donor and Organisation ).
 - If you open the app just after installation, you are asked to enter login credentials. After successful login user will be redirected to respective dashboards. If not you can create an account, Here you will be asked some basic details and  an option  to let us know whether you are a donor or for an organisation. Thereafter you will be asked for mobile number verification.If you agree we sent you an OTP. 
 - If you are an user,  After mobile number verification,  your account will be created and you will be redirected to dashboad.
 - If you are creating an account for your organisation, After mobile number verification , you are asked to enter the details of your organisation. On successful submission, we will receive your form. Untill we verify your organisation you will not be redirected to dashboard.
