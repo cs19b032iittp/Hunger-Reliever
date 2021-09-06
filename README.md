@@ -8,7 +8,7 @@
 
 - Hunger is the leading cause of death in the world. Our planet has provided us with tremendous resources, but unequal access and inefficient handling leaves millions of people malnourished.
 
-- In 2015 the global community adopted the 17 Global Goals for Sustainable Development to improve people’s lives by 2030. ** Goal 2 – Zero Hunger – pledges to end hunger, achieve food security, improve nutrition and promote sustainable agriculture,** and is the priority of the World Food Programme.
+- In 2015 the global community adopted the 17 Global Goals for Sustainable Development to improve people’s lives by 2030. **Goal 2 – Zero Hunger – pledges to end hunger, achieve food security, improve nutrition and promote sustainable agriculture,** and is the priority of the World Food Programme.
 
 - In a research it was concluded that around 2 billion people are not having access to the proper food and 40% of food generated is being wasted.
 
