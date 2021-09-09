@@ -1,6 +1,6 @@
-*[.apk link](# [Demo Video Link](https://drive.google.com/drive/folders/1Wfw1B53Rz_V8zrNDEvPR4cDpXrBhX7tU?usp=sharing))
+[Demo video and .apk file Link](#demo-video-and-apk-file-link)
 
-### Zero Hunger
+# Zero Hunger
 
 [![Zero Hunger](https://www.wfp.org/sites/default/files/images/zerohunger_hero.jpg "Zero Hunger")](https://www.wfp.org/sites/default/files/images/zerohunger_hero.jpg)
 
@@ -59,7 +59,7 @@ In this activity , you can see the list of the requests that you have accepted f
 
 
 
-# [Demo Video Link](https://drive.google.com/drive/folders/1Wfw1B53Rz_V8zrNDEvPR4cDpXrBhX7tU?usp=sharing)
+## Demo video and .apk file Link
 
 Here is the drive folder link, you can find our apk file and and demo video.
 https://drive.google.com/drive/folders/1Wfw1B53Rz_V8zrNDEvPR4cDpXrBhX7tU?usp=sharing
